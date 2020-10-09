@@ -22,7 +22,15 @@
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
         <classpath path="${jacocoantPath}" />
     </taskdef>
-
+    <target name="compile" description="compile the source">
+        <echo>编译</echo>
+        <delete dir="${sourcecode}/classes"/>
+        <mkdir dir="${sourcecode}/classes"/>
+        <mkdir dir="${sourcecode}/classes/test-classes"/>
+        <!-- Compile the java code from ${src} into ${build} -->
+        <javac srcdir="${sourcecode}/src/main/java" destdir="${sourcecode}/classes" />
+        <javac srcdir="${sourcecode}/src/test/java" destdir="${sourcecode}/classes/test-classes" />
+    </target>
 
     <!--dump任务:
         根据前面配置的ip地址，和端口号，
