@@ -64,5 +64,5 @@
             <xml destfile="${reportfolderPath}/report.xml"/>
         </jacoco:report>
     </target>
-    <target name="rebuild" depends="compile,dump,report"/>
+    <target name="rebuild" depends="dump,report"/>
 </project>
