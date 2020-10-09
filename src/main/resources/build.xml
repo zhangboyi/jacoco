@@ -16,7 +16,7 @@
     <property name="server_port" value="8083"/>
 
     <!--.class文件路径-->
-    <property name="Classpath" value="${sourcecode}/target/" />
+    <property name="Classpath" value="${sourcecode}/classes" />
 
     <!--让ant知道去哪儿找JaCoCo-->
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
@@ -46,11 +46,7 @@
             <structure name="JaCoCo Report">
                 <group name="output report">
                     <classfiles>
-                        <fileset dir="${sourcecode}/classes">
-<!--                            <exclude name="**/maven-archiver"/>
-                            <exclude name="**/surefire-reports"/>
-                            <exclude name="**/maven-status"/>
-                            <exclude name="**/surefire-reports"/>-->
+                        <fileset dir="${Classpath}">
                         </fileset>
                     </classfiles>
                     <sourcefiles encoding="utf-8">
