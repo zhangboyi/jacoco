@@ -22,24 +22,7 @@
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
         <classpath path="${jacocoantPath}" />
     </taskdef>
-<!--    <target name="compileDebug">-->
-<!--        <javac destdir="${Classpath}" srcdir="${sourcecode}/src" debug="true" debuglevel="lines,vars,source">-->
-<!--        </javac>-->
-<!--    </target>-->
-    <target name="compile">
-        <echo>编译</echo>
-        <delete dir="${sourcecode}/classes"></delete>
-        <mkdir dir="${sourcecode}/classes"/>
-        <mkdir dir="${sourcecode}/classes/test-classes"/>
-        <javac srcdir="${sourcecode}/src/main/java" destdir="${sourcecode}/classes" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
-            <src path="${sourcecode}/src/main/java"></src>
-            <src path="${sourcecode}/src/test/java"></src>
-        </javac>
-<!--        <delete dir="${sourcecode}/classes/test-classes"></delete>
-        <mkdir dir="${sourcecode}/classes/test-classes"/>
-        <javac srcdir="${sourcecode}/src/test/java" destdir="${sourcecode}/classes/test-classes" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
-        </javac>-->
-    </target>
+
 
     <!--dump任务:
         根据前面配置的ip地址，和端口号，
