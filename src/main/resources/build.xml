@@ -54,7 +54,7 @@
             <structure name="JaCoCo Report">
                 <group name="output report">
                     <classfiles>
-                        <fileset dir="${Classpath}">
+                        <fileset dir="${sourcecode}/classes">
                         </fileset>
                     </classfiles>
                     <sourcefiles encoding="utf-8">
