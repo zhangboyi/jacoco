@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="maven_test" xmlns:jacoco="antlib:org.jacoco.ant" >
+<project name="jacoco" xmlns:jacoco="antlib:org.jacoco.ant" >
 
 <!--    <jacoco:agent property="-javaagent:/opt/jacoco-0.8.7/lib/]jacocoagent.jar=includes=*,output=tcpserver,port=8083,address=127.0.0.1,append=true -Xverify:none"/>-->
     <!--源代码路径-->
