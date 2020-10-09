@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Jacoco" xmlns:jacoco="antlib:org.jacoco.ant" default="jacoco">
     <!--源代码路径-->
-    <property name="sourcecode" value="/var/lib/jenkins/workspace/maven_test" />
+    <property name="sourcecode" value="/var/lib/jenkins/workspace/jacoco" />
     <property name="jacocoantPath" value="/opt/jacoco/lib/jacocoant.jar"/>
     <property name="integrationJacocoexecPath" value="${sourcecode}/jacoco-integration.exec"/>
 
