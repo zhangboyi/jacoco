@@ -16,7 +16,7 @@
     <property name="server_port" value="8083"/>
 
     <!--.class文件路径-->
-    <property name="Classpath" value="${sourcecode}/classes" />
+    <property name="Classpath" value="${sourcecode}/target/" />
 
     <!--让ant知道去哪儿找JaCoCo-->
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
