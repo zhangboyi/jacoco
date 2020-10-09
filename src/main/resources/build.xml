@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+<project name="maven_test" xmlns:jacoco="antlib:org.jacoco.ant" >
+
+<!--    <jacoco:agent property="-javaagent:/opt/jacoco-0.8.7/lib/]jacocoagent.jar=includes=*,output=tcpserver,port=8083,address=127.0.0.1,append=true -Xverify:none"/>-->
+    <!--源代码路径-->
+    <property name="sourcecode" value="/var/lib/jenkins/workspace/jacoco" />
+    <!--JaCoCo的安装路径-->
+    <property name="jacocoantPath" value="/opt/jacoco/lib/jacocoant.jar"/>
+    <!--最终生成.exec文件的路径，JaCoCo就是根据这个文件生成最终的报告的-->
+    <property name="jacocoexecPath" value="${sourcecode}/jacoco.exec"/>
+    <!--生成覆盖率报告的路径-->
+    <property name="reportfolderPath" value="${sourcecode}/report/"/>
+    <!--远程tomcat服务或者应用的ip地址-->
+    <property name="server_ip" value="10.65.229.121"/>
+    <!--前面配置的远程tomcat服务或者应用打开的端口，要跟上面配置的一样-->
+    <property name="server_port" value="8083"/>
+
+    <!--.class文件路径-->
+    <property name="Classpath" value="${sourcecode}/target/" />
+
+    <!--让ant知道去哪儿找JaCoCo-->
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="${jacocoantPath}" />
+    </taskdef>
+<!--    <target name="compileDebug">-->
+<!--        <javac destdir="${Classpath}" srcdir="${sourcecode}/src" debug="true" debuglevel="lines,vars,source">-->
+<!--        </javac>-->
+<!--    </target>-->
+    <target name="compile">
+        <echo>编译</echo>
+        <delete dir="${sourcecode}/classes"></delete>
+        <mkdir dir="${sourcecode}/classes"/>
+        <mkdir dir="${sourcecode}/classes/test-classes"/>
+        <javac srcdir="${sourcecode}/src/main/java" destdir="${sourcecode}/classes" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+            <src path="${sourcecode}/src/main/java"></src>
+            <src path="${sourcecode}/src/test/java"></src>
+        </javac>
+<!--        <delete dir="${sourcecode}/classes/test-classes"></delete>
+        <mkdir dir="${sourcecode}/classes/test-classes"/>
+        <javac srcdir="${sourcecode}/src/test/java" destdir="${sourcecode}/classes/test-classes" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+        </javac>-->
+    </target>
+
+    <!--dump任务:
+        根据前面配置的ip地址，和端口号，
+        访问目标tomcat服务或者应用，并生成.exec文件。-->
+    <target name="dump" depends="compile">
+        <jacoco:dump address="${server_ip}" reset="true" destfile="${jacocoexecPath}" port="${server_port}" append="flase" />
+    </target>
+
+    <!--JaCoCo任务:
+        根据前面配置的源代码路径和.class文件路径，
+        根据dump后，生成的.exec文件，生成最终的html覆盖率报告。-->
+    <target name="report" depends="dump">
+        <delete dir="${reportfolderPath}" />
+        <mkdir dir="${reportfolderPath}" />
+
+        <jacoco:report>
+            <executiondata>
+                <file file="${jacocoexecPath}" />
+            </executiondata>
+
+            <structure name="JaCoCo Report">
+                <group name="output report">
+                    <classfiles>
+                        <fileset dir="${sourcecode}/classes">
+<!--                            <exclude name="**/maven-archiver"/>
+                            <exclude name="**/surefire-reports"/>
+                            <exclude name="**/maven-status"/>
+                            <exclude name="**/surefire-reports"/>-->
+                        </fileset>
+                    </classfiles>
+                    <sourcefiles encoding="utf-8">
+                        <fileset dir="${sourcecode}/src/main/java" />
+                    </sourcefiles>
+                </group>
+            </structure>
+
+            <html destdir="${reportfolderPath}" encoding="utf-8" />
+            <csv destfile="${reportfolderPath}/report.csv"/>
+            <xml destfile="${reportfolderPath}/report.xml"/>
+        </jacoco:report>
+    </target>
+    <target name="rebuild" depends="compile,dump,report"/>
+</project>
