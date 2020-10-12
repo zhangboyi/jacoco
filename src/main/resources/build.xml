@@ -28,8 +28,8 @@
         <mkdir dir="${sourcecode}/classes"/>
         <mkdir dir="${sourcecode}/classes/test-classes"/>
         <!-- Compile the java code from ${src} into ${build} -->
-        <javac srcdir="${sourcecode}/src/main/java" destdir="${sourcecode}/classes" />
-        <javac srcdir="${sourcecode}/src/test/java" destdir="${sourcecode}/classes/test-classes" />
+        <javac srcdir="${sourcecode}" destdir="${sourcecode}/classes" />
+<!--        <javac srcdir="${sourcecode}/src/test/java" destdir="${sourcecode}/classes/test-classes" />-->
     </target>
 
     <!--dump任务:

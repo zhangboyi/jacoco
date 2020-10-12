@@ -3,8 +3,6 @@ package com.test.jacoco.test;
 /**
  * Created by zc on 2017/5/2.
  */
-
-import org.springframework.util.Assert;
 import org.junit.Test;
 import com.test.jacoco.HelloWorld;
 
